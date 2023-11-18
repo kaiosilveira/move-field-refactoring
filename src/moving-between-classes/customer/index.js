@@ -5,7 +5,7 @@ const dateToday = () => new Date();
 export class Customer {
   constructor(name, discountRate) {
     this._name = name;
-    this._discountRate = discountRate;
+    this._setDiscountRate(discountRate);
     this._contract = new CustomerContract(dateToday());
   }
 
@@ -13,13 +13,17 @@ export class Customer {
     return this._discountRate;
   }
 
+  _setDiscountRate(aNumber) {
+    this._discountRate = aNumber;
+  }
+
   becomePreferred() {
-    this._discountRate += 0.03;
+    this._setDiscountRate(this.discountRate + 0.03);
     // other nice things
   }
 
   applyDiscount(amount) {
-    const discountValue = amount.multiply(this._discountRate);
+    const discountValue = amount.multiply(this.discountRate);
     return amount.subtract(discountValue);
   }
 }
