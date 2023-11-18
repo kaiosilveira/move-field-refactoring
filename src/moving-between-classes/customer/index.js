@@ -5,16 +5,16 @@ const dateToday = () => new Date();
 export class Customer {
   constructor(name, discountRate) {
     this._name = name;
+    this._contract = new CustomerContract(dateToday(), discountRate);
     this._setDiscountRate(discountRate);
-    this._contract = new CustomerContract(dateToday());
   }
 
   get discountRate() {
-    return this._discountRate;
+    return this._contract._discountRate;
   }
 
   _setDiscountRate(aNumber) {
-    this._discountRate = aNumber;
+    this._contract._discountRate = aNumber;
   }
 
   becomePreferred() {
